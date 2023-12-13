@@ -1,0 +1,3 @@
+int appID = 2026296062;
+const appSign = 'c10da63c736a068656e422579a149e3b2f8702c475802efe52742456f66c44a2';
+const  serverSecret = '497d4eac451b9e54d3c62510e9164eee';

@@ -1,0 +1,15 @@
+type Comments @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userName: String!
+  comment: String
+  userIdentity: String!
+  Uid: [Users] @hasMany(indexName: "byComments", fields: ["id"])
+  username: Users @hasOne
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  userName: String!
+  userIdentity: String!
+  commentsID: ID! @index(name: "byComments")
+} 
