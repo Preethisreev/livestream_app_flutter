@@ -1,3 +1,4 @@
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:live_stream_app/constants/colors.dart';
 
@@ -15,7 +16,9 @@ class CommentSection extends StatefulWidget {
 
 class _CommentSectionState extends State<CommentSection> {
   final TextEditingController commentController = TextEditingController();
-  List<Comment> comments = [];// List to store comments
+  List<Comment> comments = [];
+  // List to store comments
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,6 +51,19 @@ class _CommentSectionState extends State<CommentSection> {
       ],
     );
   }
+  Future<void> saveComment() async{
+    final newComment = Comment(
+        userName: widget.username,
+        userImage:'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL,
+        text: commentController.text
+    );
+    try{
+      await Amplify.DataStore.save(newComment);
+    } on DataStoreException catch(e){
+      safePrint('Something went wrong saaving model:${e.message}');
+    }
+  }
+
 }
 
 class CommentInput extends StatefulWidget {

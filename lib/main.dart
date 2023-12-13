@@ -9,25 +9,37 @@ import 'models/ModelProvider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await configureAmplify();
   runApp(const MyApp());
 }
 
-final AmplifyDataStore _dataStorePlugin = AmplifyDataStore(modelProvider: ModelProvider.instance);
-
-Future<void> configureAmplify() async {
-  try {
-    await Amplify.addPlugins([_dataStorePlugin]);
-    await Amplify.configure(amplifyconfig);
-    print('Amplify configured successfully');
-  } catch (err) {
-    print('Error configuring Amplify: $err');  }
-}
 
 
-  class MyApp extends StatelessWidget {
+  class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _configureAmplify();
+  }
+  Future<void> _configureAmplify() async {
+    // Add the following lines to your app initialization to add the DataStore plugin
+    final datastorePlugin =
+    AmplifyDataStore(modelProvider: ModelProvider.instance);
+    await Amplify.addPlugin(datastorePlugin);
+
+    try {
+      await Amplify.configure(amplifyconfig);
+    } on AmplifyAlreadyConfiguredException {
+      safePrint(
+          'Tried to reconfigure Amplify; this can occur when your app restarts on Android.');
+    }
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
