@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "livestreamApp",
+  "AppSyncApiName": "LivestreamApp",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

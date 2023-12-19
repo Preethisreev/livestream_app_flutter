@@ -94,7 +94,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           Expanded(
-            child: CommentSection(username: widget.username, isHost: widget.isHost),
+            child: CommentSection(username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity,),
           ),
         ],
       ),

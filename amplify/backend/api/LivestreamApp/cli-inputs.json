@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "livestreamApp",
+    "apiName": "LivestreamApp",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

@@ -1,14 +1,16 @@
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:live_stream_app/backend/providers/comment_provider.dart';
 import 'package:live_stream_app/constants/colors.dart';
+import 'package:live_stream_app/models/Comment.dart';
+import 'package:provider/provider.dart';
 
 class CommentSection extends StatefulWidget {
   final String username;
   final bool isHost;
-  const CommentSection({super.key, required this.username, required this.isHost});
-
-
-
+  final Future<String> userIdentity;
+  const CommentSection({super.key, required this.username, required this.isHost, required this.userIdentity});
 
   @override
   State<CommentSection> createState() => _CommentSectionState();
@@ -29,39 +31,30 @@ class _CommentSectionState extends State<CommentSection> {
             itemCount: comments.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(comments[index].userImage),
+                leading: const CircleAvatar(
+                  backgroundImage: NetworkImage('https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png'),
                 ),
-                title: Text(comments[index].userName),
-                subtitle: Text(comments[index].text),
+                title: Text(comments[index].username),
+                subtitle: Text(comments[index].comment),
               );
             },
           ),
         ),
         CommentInput(onCommentSubmitted: (text) {
+    widget.userIdentity.then((userIdentity) {
           setState(() {
             comments.add(Comment(
-              userName: widget.username,
+              username: widget.username,
               userImage:
               'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL
-              text: text,
+              comment: text,
+              userIdentity:userIdentity,
             ));
           });
-        }, username: '', isHost: widget.isHost),
+          });
+        }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity,),
       ],
     );
-  }
-  Future<void> saveComment() async{
-    final newComment = Comment(
-        userName: widget.username,
-        userImage:'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL,
-        text: commentController.text
-    );
-    try{
-      await Amplify.DataStore.save(newComment);
-    } on DataStoreException catch(e){
-      safePrint('Something went wrong saaving model:${e.message}');
-    }
   }
 
 }
@@ -70,13 +63,27 @@ class CommentInput extends StatefulWidget {
   final Function(String) onCommentSubmitted;
   final String username;
   final bool isHost;
-  const CommentInput({super.key, required this.onCommentSubmitted, required this.username, required this.isHost});
+  final  Future<String> userIdentity;
+  const CommentInput({super.key, required this.onCommentSubmitted, required this.username, required this.isHost, required this.userIdentity});
   @override
   State<CommentInput> createState() => _CommentInputState();
 }
 
 class _CommentInputState extends State<CommentInput> {
-  final TextEditingController _commentController = TextEditingController();
+  late final TextEditingController _commentController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    _commentController;
+    super.initState();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _commentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -86,7 +93,8 @@ class _CommentInputState extends State<CommentInput> {
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0,bottom: 10.0),
-                child:TextField(
+                child:TextFormField(
+                  textInputAction: TextInputAction.send,
                   controller: _commentController,
                   cursorColor: Colors.blue,
                   cursorHeight: 30,
@@ -118,8 +126,24 @@ class _CommentInputState extends State<CommentInput> {
             icon: const Icon(Icons.send, color: buttonBlue),
             onPressed: () {
               if (_commentController.text.trim().isNotEmpty) {
-                widget.onCommentSubmitted(_commentController.text);
-                _commentController.clear();
+                widget.userIdentity.then((userIdentity) async {
+                  final comment = Comment(username: widget.username,comment:_commentController.text, userImage: 'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png',userIdentity: userIdentity);
+                  final response = await context.read<CommentProvider>().sendComment(comment);
+                  response.fold(
+                        (error) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Error: $error"),
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    }, (resComment) {
+                      safePrint('success');
+                    },
+                  );
+                  widget.onCommentSubmitted(_commentController.text);
+                  _commentController.clear();
+                });
               } else {
                 // Optionally, you can display a message or perform some action
                 // to inform the user that they need to enter a non-empty comment.
@@ -130,16 +154,4 @@ class _CommentInputState extends State<CommentInput> {
       ),
     );
   }
-}
-
-class Comment {
-  final String userName;
-  final String userImage;
-  final String text;
-
-  Comment({
-    required this.userName,
-    required this.userImage,
-    required this.text,
-  });
 }

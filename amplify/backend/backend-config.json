@@ -1,6 +1,6 @@
 {
   "api": {
-    "livestreamApp": {
+    "LivestreamApp": {
       "dependsOn": [],
       "output": {
         "authConfig": {
