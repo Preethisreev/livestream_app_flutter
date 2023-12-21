@@ -38,10 +38,15 @@ Future<void> configureAmplify() async{
 
 
 
-  class MyApp extends StatelessWidget {
+  class MyApp extends StatefulWidget {
   
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ Future<void> configureAmplify() async{
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

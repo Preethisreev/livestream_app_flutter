@@ -2,6 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:live_stream_app/widgets/comment_section.dart';
 import 'package:live_stream_app/widgets/videoChatScreenTestUI.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+import '../backend/providers/comment_provider.dart';
 
 
 class LiveStreamScreen extends StatefulWidget {
@@ -25,12 +29,29 @@ class LiveStreamScreen extends StatefulWidget {
 class _LiveStreamScreenState extends State<LiveStreamScreen> {
   late Future<String> userIdentity;
   late String livename;
+  late String sessionId;
+
+  void startNewSession() {
+    final commentProvider = context.read<CommentProvider>();
+
+    // Set a new session ID (you can use a UUID or any unique identifier)
+    final newSessionId = Uuid().v4();
+    commentProvider.setCurrentSessionId(newSessionId);
+    print('new session id is $newSessionId');
+    // Clear existing comments for the new session
+    commentProvider.clearComments();
+    setState(() {
+      sessionId = newSessionId;
+    });
+  }
+
 
   @override
   void initState() {
     super.initState();
     userIdentity = widget.userIdentity;
     livename = widget.livename;
+    startNewSession();
   }
 
   @override
@@ -94,7 +115,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           Expanded(
-            child: CommentSection(username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity,),
+            child: CommentSection(username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId: sessionId,),
           ),
         ],
       ),

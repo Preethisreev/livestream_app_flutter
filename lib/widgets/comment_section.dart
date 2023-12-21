@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:live_stream_app/backend/providers/comment_provider.dart';
@@ -10,7 +12,8 @@ class CommentSection extends StatefulWidget {
   final String username;
   final bool isHost;
   final Future<String> userIdentity;
-  const CommentSection({super.key, required this.username, required this.isHost, required this.userIdentity});
+  final String sessionId;
+  const CommentSection({super.key, required this.username, required this.isHost, required this.userIdentity, required this.sessionId});
 
   @override
   State<CommentSection> createState() => _CommentSectionState();
@@ -20,39 +23,87 @@ class _CommentSectionState extends State<CommentSection> {
   final TextEditingController commentController = TextEditingController();
   List<Comment> comments = [];
   // List to store comments
+  late StreamSubscription _commentSubscription;
+  @override
+  void initState() {
+    getComments();
+    super.initState();
+  }
 
+  void getComments(){
+    final commentProvider = context.read<CommentProvider>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      commentProvider.getComments();
+      _commentSubscription = commentProvider.getCommentsStream().listen(
+              (response) {
+                if(response.data != null){
+                  commentProvider.addComment(response.data!);
+                } else if (response.hasErrors){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Error in getting comments"),
+                      duration:Duration(seconds: 2),
+                    ),
+                  );
+                }
+              });
+    });
+  }
+  @override
+  void dispose() {
+    _commentSubscription.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: ListView.builder(
-            itemCount: comments.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: const CircleAvatar(
-                  backgroundImage: NetworkImage('https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png'),
-                ),
-                title: Text(comments[index].username),
-                subtitle: Text(comments[index].comment),
-              );
-            },
+          child: Consumer<CommentProvider>(
+              builder: (_, commProvider, __) {
+                if (commProvider.isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                if (commProvider.errorMessages != null){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Error"),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                }
+                return  ListView.builder(
+                  reverse:false,
+                  itemCount: commProvider.comments.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        backgroundImage: NetworkImage('https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png'),
+                      ),
+                      title: Text(commProvider.comments[index].username),
+                      subtitle: Text(commProvider.comments[index].comment),
+                    );
+                  },
+                );
+              }
           ),
         ),
         CommentInput(onCommentSubmitted: (text) {
-    widget.userIdentity.then((userIdentity) {
+        widget.userIdentity.then((userIdentity) {
           setState(() {
             comments.add(Comment(
               username: widget.username,
               userImage:
               'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL
               comment: text,
-              userIdentity:userIdentity,
+              userIdentity:userIdentity, sessionId: widget.sessionId,
             ));
           });
           });
-        }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity,),
+        }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId:widget.sessionId,),
       ],
     );
   }
@@ -64,7 +115,8 @@ class CommentInput extends StatefulWidget {
   final String username;
   final bool isHost;
   final  Future<String> userIdentity;
-  const CommentInput({super.key, required this.onCommentSubmitted, required this.username, required this.isHost, required this.userIdentity});
+  final String sessionId;
+  const CommentInput({super.key, required this.onCommentSubmitted, required this.username, required this.isHost, required this.userIdentity, required this.sessionId});
   @override
   State<CommentInput> createState() => _CommentInputState();
 }
@@ -127,7 +179,7 @@ class _CommentInputState extends State<CommentInput> {
             onPressed: () {
               if (_commentController.text.trim().isNotEmpty) {
                 widget.userIdentity.then((userIdentity) async {
-                  final comment = Comment(username: widget.username,comment:_commentController.text, userImage: 'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png',userIdentity: userIdentity);
+                  final comment = Comment(username: widget.username,comment:_commentController.text, userImage: 'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png',userIdentity: userIdentity, sessionId: widget.sessionId);
                   final response = await context.read<CommentProvider>().sendComment(comment);
                   response.fold(
                         (error) {
@@ -145,8 +197,12 @@ class _CommentInputState extends State<CommentInput> {
                   _commentController.clear();
                 });
               } else {
-                // Optionally, you can display a message or perform some action
-                // to inform the user that they need to enter a non-empty comment.
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Error: Comment cannot be empty"),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
               }
             },
           ),
