@@ -23,7 +23,7 @@ class _CreateScreenState extends State<CreateScreen> {
   late String roomName;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _livenameController = TextEditingController();
-  late final String sessionId;
+
 
 @override
   void initState() {
@@ -217,17 +217,6 @@ class _CreateScreenState extends State<CreateScreen> {
     } catch (e) {
       print("Error generating user identity: $e");
       throw Exception("Error generating user identity");
-    }
-  }
-  Future<String> getSessionId() async {
-    try {
-      // Generate a unique user identity using UUID
-      String sessionId = const Uuid().v4();
-      print(sessionId);
-      return sessionId;
-    } catch (e) {
-      print("Error generating session identity: $e");
-      throw Exception("Error generating session identity");
     }
   }
 }
