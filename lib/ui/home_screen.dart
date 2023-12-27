@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -41,29 +42,32 @@ class HomeScreen extends StatelessWidget {
                       backgroundImage: NetworkImage('https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250'),
                     ),
                   ),
-                 Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                       Text('Elon Reeve Musk',
-                           style: TextStyle(
-                        color: Colors.white,
-                             fontSize: 22,
-                             fontWeight: FontWeight.w400
-                      )),
-                      Text('Special Live',style: TextStyle(
-                        color: buttonTextSub,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w400
-                      ))
-                    ],
-                  ),
+                 SingleChildScrollView(
+                   scrollDirection: Axis.vertical,
+                   child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                         Text('Elon Reeve Musk',
+                             style: TextStyle(
+                          color: Colors.white,
+                               fontSize: 22,
+                               fontWeight: FontWeight.w400
+                        )),
+                        Text('Special Live',style: TextStyle(
+                          color: buttonTextSub,
+                          fontSize: 21,
+                          fontWeight: FontWeight.w400
+                        ))
+                      ],
+                    ),
+                 ),
                 ],
               ),
             ),
           ),
-
+      
           const SizedBox(height: 30),
-
+      
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: buttonBlue,
@@ -81,7 +85,7 @@ class HomeScreen extends StatelessWidget {
             child: const Padding(
               padding: EdgeInsets.all(15.0),
               child: SizedBox(
-                width: 240,
+                width: 260,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,

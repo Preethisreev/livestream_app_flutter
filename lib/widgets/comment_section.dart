@@ -36,17 +36,19 @@ class _CommentSectionState extends State<CommentSection> {
       commentProvider.getComments();
       _commentSubscription = commentProvider.getCommentsStream().listen(
               (response) {
-                if(response.data != null){
-                  commentProvider.addComment(response.data!);
-                } else if (response.hasErrors){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Error in getting comments"),
-                      duration:Duration(seconds: 2),
-                    ),
-                  );
-                }
-              });
+                print("Received comment response: $response");
+            if(response.data != null){
+              commentProvider.addComment(response.data!);
+            } else if (response.hasErrors){
+              print("Error in getting comments: ${response.errors}");
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Error in getting comments"),
+                  duration:Duration(seconds: 2),
+                ),
+              );
+            }
+          });
     });
   }
   @override
@@ -92,16 +94,16 @@ class _CommentSectionState extends State<CommentSection> {
           ),
         ),
         CommentInput(onCommentSubmitted: (text) {
-        widget.userIdentity.then((userIdentity) {
-          setState(() {
-            comments.add(Comment(
-              username: widget.username,
-              userImage:
-              'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL
-              comment: text,
-              userIdentity:userIdentity, sessionId: widget.sessionId,
-            ));
-          });
+          widget.userIdentity.then((userIdentity) {
+            setState(() {
+              comments.add(Comment(
+                username: widget.username,
+                userImage:
+                'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL
+                comment: text,
+                userIdentity:userIdentity, sessionId: widget.sessionId,
+              ));
+            });
           });
         }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId:widget.sessionId,),
       ],
@@ -190,8 +192,8 @@ class _CommentInputState extends State<CommentInput> {
                         ),
                       );
                     }, (resComment) {
-                      safePrint('success');
-                    },
+                    safePrint('success');
+                  },
                   );
                   widget.onCommentSubmitted(_commentController.text);
                   _commentController.clear();

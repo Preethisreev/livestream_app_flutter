@@ -30,6 +30,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <!-- Permissions required by the SDK -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />

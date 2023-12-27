@@ -11,18 +11,17 @@ class VideoChatWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ZegoUIKitPrebuiltLiveStreaming(
-          appID: appID,
-          appSign: appSign,
-          userID: userIdentity,
-          userName: livename,
-          liveID: 'testLiveID',
-          config: isHost
-              ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
-              : ZegoUIKitPrebuiltLiveStreamingConfig.audience()
-            ..bottomMenuBarConfig.showInRoomMessageButton=false,
-      ),
+    return ZegoUIKitPrebuiltLiveStreaming(
+      appID: appID,
+      appSign: appSign,
+      userID: userIdentity,
+      userName: livename,
+      liveID: 'testLiveID',
+      config: isHost
+          ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
+          : ZegoUIKitPrebuiltLiveStreamingConfig.audience()
+        ..bottomMenuBarConfig.showInRoomMessageButton=false,
+
     );
   }
 }

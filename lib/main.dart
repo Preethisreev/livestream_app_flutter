@@ -6,20 +6,23 @@ import 'package:live_stream_app/backend/providers/comment_provider.dart';
 import 'package:live_stream_app/models/ModelProvider.dart';
 import 'package:live_stream_app/ui/home_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
 
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await configureAmplify();
-  runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (context)=>CommentProvider()),
-    ],
-      child: const MyApp(),
-    )
+  ZegoUIKit().initLog().then((value) {
+    runApp(
+        MultiProvider(providers: [
+          ChangeNotifierProvider(create: (context) => CommentProvider()),
+        ],
+          child: const MyApp(),
+        )
 
-  );
+    );
+    });
 }
 
 
@@ -34,9 +37,6 @@ Future<void> configureAmplify() async{
     safePrint("Error configuring Amplify: $e");
   }
 }
-
-
-
 
   class MyApp extends StatefulWidget {
   

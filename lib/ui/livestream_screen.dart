@@ -100,10 +100,12 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
                 future: userIdentity,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return VideoChatWidget(
+                    return SafeArea(
+                      child: VideoChatWidget(
                         userIdentity: snapshot.data!,
                         livename: livename,
-                       isHost: widget.isHost,
+                        isHost: widget.isHost,
+                      ),
                     );
                   } else if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");

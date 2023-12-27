@@ -28,138 +28,138 @@ class _JoinScreenState extends State<JoinScreen> {
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 320,
-                        child: TextField(
-                          controller: _nameController,
-                          cursorColor: Colors.blue,
-                          cursorHeight: 30,
-                          textAlign: TextAlign.justify,
-                          decoration: const InputDecoration(
-                            hintText: 'Your name',
-                            contentPadding: EdgeInsets.symmetric(vertical: 9.0, horizontal: 16.0),
-                            isDense: true,
-                            hintStyle: TextStyle(
-                              color: Colors.black45,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
+            padding: const EdgeInsets.all(30.0),
+            child: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 320,
+                      child: TextField(
+                        controller: _nameController,
+                        cursorColor: Colors.blue,
+                        cursorHeight: 30,
+                        textAlign: TextAlign.justify,
+                        decoration: const InputDecoration(
+                          hintText: 'Your name',
+                          contentPadding: EdgeInsets.symmetric(vertical: 9.0, horizontal: 16.0),
+                          isDense: true,
+                          hintStyle: TextStyle(
+                            color: Colors.black45,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: buttonBlue,
                             ),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: buttonBlue,
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(50)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black87),
-                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black87),
+                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 30,
-                      ), Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // watch live blue button
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: const Size(320, 50),
-                              backgroundColor: buttonBlue,
-                              foregroundColor: Colors.indigo,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LiveStreamScreen(
-                                    username:_nameController.text ,
-                                    isHost: false,
-                                    userIdentity: getUserIdentity(),
-                                    livename: _nameController.text,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(CupertinoIcons.paperplane_fill, color: Colors.white, size: 25),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    ' Watch Live',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ), Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // watch live blue button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(320, 50),
+                            backgroundColor: buttonBlue,
+                            foregroundColor: Colors.indigo,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          // back white button
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              fixedSize: const Size(320, 50),
-                              backgroundColor: buttonWhite,
-                              foregroundColor: Colors.grey,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LiveStreamScreen(
+                                  username:_nameController.text ,
+                                  isHost: false,
+                                  userIdentity: getUserIdentity(),
+                                  livename: _nameController.text,
                                 ),
-                              );
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(CupertinoIcons.paperplane_fill, color: Colors.black, size: 25),
-                                  SizedBox(width: 8),
-                                  Text(
-                                    ' Back',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ],
                               ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(CupertinoIcons.paperplane_fill, color: Colors.white, size: 25),
+                                SizedBox(width: 8),
+                                Text(
+                                  ' Watch Live',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      )
-                    ]),
-              ),
+                        ),
+                        const SizedBox(height: 30),
+                        // back white button
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            fixedSize: const Size(320, 50),
+                            backgroundColor: buttonWhite,
+                            foregroundColor: Colors.grey,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomeScreen(),
+                              ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(CupertinoIcons.paperplane_fill, color: Colors.black, size: 25),
+                                SizedBox(width: 8),
+                                Text(
+                                  ' Back',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    )
+                  ]),
             ),
+          ),
         ),
       ),
     );

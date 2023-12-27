@@ -25,12 +25,12 @@ class _CreateScreenState extends State<CreateScreen> {
   final TextEditingController _livenameController = TextEditingController();
 
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
-  super.initState();
-  requestPermission();
-}
+    super.initState();
+    requestPermission();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +125,7 @@ class _CreateScreenState extends State<CreateScreen> {
                       ),
                     ),
                     onPressed: ()async {
-                      await createEngine();
+                      //await createEngine();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -220,11 +220,11 @@ class _CreateScreenState extends State<CreateScreen> {
     }
   }
 }
-Future<void> createEngine() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await ZegoExpressEngine.createEngineWithProfile(ZegoEngineProfile(
-    appID,
-    ZegoScenario.Default,
-    appSign: kIsWeb ? null : appSign,
-  ));
-}
+// Future<void> createEngine() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await ZegoExpressEngine.createEngineWithProfile(ZegoEngineProfile(
+//     appID,
+//     ZegoScenario.Default,
+//     appSign: kIsWeb ? null : appSign,
+//   ));
+// }
