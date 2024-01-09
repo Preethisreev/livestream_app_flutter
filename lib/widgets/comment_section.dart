@@ -83,7 +83,7 @@ class _CommentSectionState extends State<CommentSection> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: const CircleAvatar(
-                        backgroundImage: NetworkImage('https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png'),
+                        backgroundImage: NetworkImage('https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png'),
                       ),
                       title: Text(commProvider.comments[index].username),
                       subtitle: Text(commProvider.comments[index].comment),
@@ -99,7 +99,7 @@ class _CommentSectionState extends State<CommentSection> {
               comments.add(Comment(
                 username: widget.username,
                 userImage:
-                'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png', // Set the actual user image URL
+                'https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png', // Set the actual user image URL
                 comment: text,
                 userIdentity:userIdentity, sessionId: widget.sessionId,
               ));
@@ -181,7 +181,7 @@ class _CommentInputState extends State<CommentInput> {
             onPressed: () {
               if (_commentController.text.trim().isNotEmpty) {
                 widget.userIdentity.then((userIdentity) async {
-                  final comment = Comment(username: widget.username,comment:_commentController.text, userImage: 'https://i.pinimg.com/originals/7d/34/d9/7d34d9d53640af5cfd2614c57dfa7f13.png',userIdentity: userIdentity, sessionId: widget.sessionId);
+                  final comment = Comment(username: widget.username,comment:_commentController.text, userImage: 'https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png',userIdentity: userIdentity, sessionId: widget.sessionId);
                   final response = await context.read<CommentProvider>().sendComment(comment);
                   response.fold(
                         (error) {

@@ -124,8 +124,7 @@ class _CreateScreenState extends State<CreateScreen> {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    onPressed: ()async {
-                      //await createEngine();
+                    onPressed: (){
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -220,11 +219,3 @@ class _CreateScreenState extends State<CreateScreen> {
     }
   }
 }
-// Future<void> createEngine() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await ZegoExpressEngine.createEngineWithProfile(ZegoEngineProfile(
-//     appID,
-//     ZegoScenario.Default,
-//     appSign: kIsWeb ? null : appSign,
-//   ));
-// }

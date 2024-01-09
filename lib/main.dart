@@ -20,7 +20,6 @@ void main() async{
         ],
           child: const MyApp(),
         )
-
     );
     });
 }
