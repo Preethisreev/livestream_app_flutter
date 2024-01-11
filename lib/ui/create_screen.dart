@@ -138,7 +138,7 @@ class _CreateScreenState extends State<CreateScreen> {
                       );
                     },
                     child: const Padding(
-                      padding: EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(12.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
@@ -178,7 +178,7 @@ class _CreateScreenState extends State<CreateScreen> {
                       );
                     },
                     child: const Padding(
-                      padding: EdgeInsets.all(15.0),
+                      padding: EdgeInsets.all(12.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,

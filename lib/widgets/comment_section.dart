@@ -58,55 +58,57 @@ class _CommentSectionState extends State<CommentSection> {
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Consumer<CommentProvider>(
-              builder: (_, commProvider, __) {
-                if (commProvider.isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                if (commProvider.errorMessages != null){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Error"),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
-                }
-                return  ListView.builder(
-                  reverse:false,
-                  itemCount: commProvider.comments.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: const CircleAvatar(
-                        backgroundImage: NetworkImage('https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png'),
-                      ),
-                      title: Text(commProvider.comments[index].username),
-                      subtitle: Text(commProvider.comments[index].comment),
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Consumer<CommentProvider>(
+                builder: (_, commProvider, __) {
+                  if (commProvider.isLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
                     );
-                  },
-                );
-              }
+                  }
+                  if (commProvider.errorMessages != null){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Error"),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                  return  ListView.builder(
+                    reverse:false,
+                    itemCount: commProvider.comments.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: const CircleAvatar(
+                          backgroundImage: NetworkImage('https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png'),
+                        ),
+                        title: Text(commProvider.comments[index].username),
+                        subtitle: Text(commProvider.comments[index].comment),
+                      );
+                    },
+                  );
+                }
+            ),
           ),
-        ),
-        CommentInput(onCommentSubmitted: (text) {
-          widget.userIdentity.then((userIdentity) {
-            setState(() {
-              comments.add(Comment(
-                username: widget.username,
-                userImage:
-                'https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png', // Set the actual user image URL
-                comment: text,
-                userIdentity:userIdentity, sessionId: widget.sessionId,
-              ));
+          CommentInput(onCommentSubmitted: (text) {
+            widget.userIdentity.then((userIdentity) {
+              setState(() {
+                comments.add(Comment(
+                  username: widget.username,
+                  userImage:
+                  'https://cdn2.iconfinder.com/data/icons/business-and-finance-related-hand-gestures/256/face_female_blank_user_avatar_mannequin-512.png', // Set the actual user image URL
+                  comment: text,
+                  userIdentity:userIdentity, sessionId: widget.sessionId,
+                ));
+              });
             });
-          });
-        }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId:widget.sessionId,),
-      ],
+          }, username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId:widget.sessionId,),
+        ],
+      ),
     );
   }
 
@@ -148,6 +150,7 @@ class _CommentInputState extends State<CommentInput> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0,bottom: 10.0),
                 child:TextFormField(
+
                   textInputAction: TextInputAction.send,
                   controller: _commentController,
                   cursorColor: Colors.blue,

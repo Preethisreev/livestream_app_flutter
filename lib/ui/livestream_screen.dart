@@ -93,19 +93,17 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           AspectRatio(
-            aspectRatio: 1.1,
+            aspectRatio: 1.169,
             child: SizedBox(
               width: double.infinity,
               child: FutureBuilder<String>(
                 future: userIdentity,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return SafeArea(
-                      child: VideoChatWidget(
-                        userIdentity: snapshot.data!,
-                        livename: livename,
-                        isHost: widget.isHost,
-                      ),
+                    return VideoChatWidget(
+                      userIdentity: snapshot.data!,
+                      livename: livename,
+                      isHost: widget.isHost,
                     );
                   } else if (snapshot.hasError) {
                     return Text("Error: ${snapshot.error}");
@@ -117,6 +115,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           Expanded(
+            flex: 1,
             child: CommentSection(username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId: sessionId,),
           ),
         ],
