@@ -93,7 +93,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
             ),
           ),
           AspectRatio(
-            aspectRatio: 1.169,
+            aspectRatio: 1.199,
             child: SizedBox(
               width: double.infinity,
               child: FutureBuilder<String>(
