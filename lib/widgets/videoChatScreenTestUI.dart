@@ -5,9 +5,14 @@ import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_stre
 class VideoChatWidget extends StatelessWidget {
   final String userIdentity;
   final String livename;
-  const VideoChatWidget({Key? key, this.isHost = false, required this.userIdentity, required this.livename}) : super(key: key);
-  final bool isHost;
 
+  const VideoChatWidget(
+      {Key? key,
+      this.isHost = false,
+      required this.userIdentity,
+      required this.livename})
+      : super(key: key);
+  final bool isHost;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +25,7 @@ class VideoChatWidget extends StatelessWidget {
       config: isHost
           ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
           : ZegoUIKitPrebuiltLiveStreamingConfig.audience()
-        ..bottomMenuBarConfig.showInRoomMessageButton=false,
-
+        ..bottomMenuBarConfig.showInRoomMessageButton = false,
     );
   }
 }

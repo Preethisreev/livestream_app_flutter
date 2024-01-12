@@ -22,7 +22,6 @@
 import 'ModelProvider.dart';
 import 'package:amplify_core/amplify_core.dart' as amplify_core;
 
-
 /** This is an auto generated class representing the Comment type in your schema. */
 class Comment extends amplify_core.Model {
   static const classType = const _CommentModelType();
@@ -37,125 +36,145 @@ class Comment extends amplify_core.Model {
 
   @override
   getInstanceType() => classType;
-  
-  @Deprecated('[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
+
+  @Deprecated(
+      '[getId] is being deprecated in favor of custom primary key feature. Use getter [modelIdentifier] to get model identifier.')
   @override
   String getId() => id;
-  
+
   CommentModelIdentifier get modelIdentifier {
-      return CommentModelIdentifier(
-        id: id
-      );
+    return CommentModelIdentifier(id: id);
   }
-  
+
   String get username {
     try {
       return _username!;
-    } catch(e) {
+    } catch (e) {
       throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
+          amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion: amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString());
     }
   }
-  
+
   String get userIdentity {
     try {
       return _userIdentity!;
-    } catch(e) {
+    } catch (e) {
       throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
+          amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion: amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString());
     }
   }
-  
+
   String get comment {
     try {
       return _comment!;
-    } catch(e) {
+    } catch (e) {
       throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
+          amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion: amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString());
     }
   }
-  
+
   String get userImage {
     try {
       return _userImage!;
-    } catch(e) {
+    } catch (e) {
       throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
+          amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion: amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString());
     }
   }
-  
+
   String get sessionId {
     try {
       return _sessionId!;
-    } catch(e) {
+    } catch (e) {
       throw amplify_core.AmplifyCodeGenModelException(
-          amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastExceptionMessage,
-          recoverySuggestion:
-            amplify_core.AmplifyExceptionMessages.codeGenRequiredFieldForceCastRecoverySuggestion,
-          underlyingException: e.toString()
-          );
+          amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastExceptionMessage,
+          recoverySuggestion: amplify_core.AmplifyExceptionMessages
+              .codeGenRequiredFieldForceCastRecoverySuggestion,
+          underlyingException: e.toString());
     }
   }
-  
+
   amplify_core.TemporalDateTime? get createdAt {
     return _createdAt;
   }
-  
+
   amplify_core.TemporalDateTime? get updatedAt {
     return _updatedAt;
   }
-  
-  const Comment._internal({required this.id, required username, required userIdentity, required comment, required userImage, required sessionId, createdAt, updatedAt}): _username = username, _userIdentity = userIdentity, _comment = comment, _userImage = userImage, _sessionId = sessionId, _createdAt = createdAt, _updatedAt = updatedAt;
-  
-  factory Comment({String? id, required String username, required String userIdentity, required String comment, required String userImage, required String sessionId}) {
+
+  const Comment._internal(
+      {required this.id,
+      required username,
+      required userIdentity,
+      required comment,
+      required userImage,
+      required sessionId,
+      createdAt,
+      updatedAt})
+      : _username = username,
+        _userIdentity = userIdentity,
+        _comment = comment,
+        _userImage = userImage,
+        _sessionId = sessionId,
+        _createdAt = createdAt,
+        _updatedAt = updatedAt;
+
+  factory Comment(
+      {String? id,
+      required String username,
+      required String userIdentity,
+      required String comment,
+      required String userImage,
+      required String sessionId}) {
     return Comment._internal(
-      id: id == null ? amplify_core.UUID.getUUID() : id,
-      username: username,
-      userIdentity: userIdentity,
-      comment: comment,
-      userImage: userImage,
-      sessionId: sessionId);
+        id: id == null ? amplify_core.UUID.getUUID() : id,
+        username: username,
+        userIdentity: userIdentity,
+        comment: comment,
+        userImage: userImage,
+        sessionId: sessionId);
   }
-  
+
   bool equals(Object other) {
     return this == other;
   }
-  
+
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Comment &&
-      id == other.id &&
-      _username == other._username &&
-      _userIdentity == other._userIdentity &&
-      _comment == other._comment &&
-      _userImage == other._userImage &&
-      _sessionId == other._sessionId;
+        id == other.id &&
+        _username == other._username &&
+        _userIdentity == other._userIdentity &&
+        _comment == other._comment &&
+        _userImage == other._userImage &&
+        _sessionId == other._sessionId;
   }
-  
+
   @override
   int get hashCode => toString().hashCode;
-  
+
   @override
   String toString() {
     var buffer = new StringBuffer();
-    
+
     buffer.write("Comment {");
     buffer.write("id=" + "$id" + ", ");
     buffer.write("username=" + "$_username" + ", ");
@@ -163,143 +182,167 @@ class Comment extends amplify_core.Model {
     buffer.write("comment=" + "$_comment" + ", ");
     buffer.write("userImage=" + "$_userImage" + ", ");
     buffer.write("sessionId=" + "$_sessionId" + ", ");
-    buffer.write("createdAt=" + (_createdAt != null ? _createdAt!.format() : "null") + ", ");
-    buffer.write("updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
+    buffer.write("createdAt=" +
+        (_createdAt != null ? _createdAt!.format() : "null") +
+        ", ");
+    buffer.write(
+        "updatedAt=" + (_updatedAt != null ? _updatedAt!.format() : "null"));
     buffer.write("}");
-    
+
     return buffer.toString();
   }
-  
-  Comment copyWith({String? username, String? userIdentity, String? comment, String? userImage, String? sessionId}) {
-    return Comment._internal(
-      id: id,
-      username: username ?? this.username,
-      userIdentity: userIdentity ?? this.userIdentity,
-      comment: comment ?? this.comment,
-      userImage: userImage ?? this.userImage,
-      sessionId: sessionId ?? this.sessionId);
-  }
-  
-  Comment copyWithModelFieldValues({
-    ModelFieldValue<String>? username,
-    ModelFieldValue<String>? userIdentity,
-    ModelFieldValue<String>? comment,
-    ModelFieldValue<String>? userImage,
-    ModelFieldValue<String>? sessionId
-  }) {
-    return Comment._internal(
-      id: id,
-      username: username == null ? this.username : username.value,
-      userIdentity: userIdentity == null ? this.userIdentity : userIdentity.value,
-      comment: comment == null ? this.comment : comment.value,
-      userImage: userImage == null ? this.userImage : userImage.value,
-      sessionId: sessionId == null ? this.sessionId : sessionId.value
-    );
-  }
-  
-  Comment.fromJson(Map<String, dynamic> json)  
-    : id = json['id'],
-      _username = json['username'],
-      _userIdentity = json['userIdentity'],
-      _comment = json['comment'],
-      _userImage = json['userImage'],
-      _sessionId = json['sessionId'],
-      _createdAt = json['createdAt'] != null ? amplify_core.TemporalDateTime.fromString(json['createdAt']) : null,
-      _updatedAt = json['updatedAt'] != null ? amplify_core.TemporalDateTime.fromString(json['updatedAt']) : null;
-  
-  Map<String, dynamic> toJson() => {
-    'id': id, 'username': _username, 'userIdentity': _userIdentity, 'comment': _comment, 'userImage': _userImage, 'sessionId': _sessionId, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
-  };
-  
-  Map<String, Object?> toMap() => {
-    'id': id,
-    'username': _username,
-    'userIdentity': _userIdentity,
-    'comment': _comment,
-    'userImage': _userImage,
-    'sessionId': _sessionId,
-    'createdAt': _createdAt,
-    'updatedAt': _updatedAt
-  };
 
-  static final amplify_core.QueryModelIdentifier<CommentModelIdentifier> MODEL_IDENTIFIER = amplify_core.QueryModelIdentifier<CommentModelIdentifier>();
+  Comment copyWith(
+      {String? username,
+      String? userIdentity,
+      String? comment,
+      String? userImage,
+      String? sessionId}) {
+    return Comment._internal(
+        id: id,
+        username: username ?? this.username,
+        userIdentity: userIdentity ?? this.userIdentity,
+        comment: comment ?? this.comment,
+        userImage: userImage ?? this.userImage,
+        sessionId: sessionId ?? this.sessionId);
+  }
+
+  Comment copyWithModelFieldValues(
+      {ModelFieldValue<String>? username,
+      ModelFieldValue<String>? userIdentity,
+      ModelFieldValue<String>? comment,
+      ModelFieldValue<String>? userImage,
+      ModelFieldValue<String>? sessionId}) {
+    return Comment._internal(
+        id: id,
+        username: username == null ? this.username : username.value,
+        userIdentity:
+            userIdentity == null ? this.userIdentity : userIdentity.value,
+        comment: comment == null ? this.comment : comment.value,
+        userImage: userImage == null ? this.userImage : userImage.value,
+        sessionId: sessionId == null ? this.sessionId : sessionId.value);
+  }
+
+  Comment.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        _username = json['username'],
+        _userIdentity = json['userIdentity'],
+        _comment = json['comment'],
+        _userImage = json['userImage'],
+        _sessionId = json['sessionId'],
+        _createdAt = json['createdAt'] != null
+            ? amplify_core.TemporalDateTime.fromString(json['createdAt'])
+            : null,
+        _updatedAt = json['updatedAt'] != null
+            ? amplify_core.TemporalDateTime.fromString(json['updatedAt'])
+            : null;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'username': _username,
+        'userIdentity': _userIdentity,
+        'comment': _comment,
+        'userImage': _userImage,
+        'sessionId': _sessionId,
+        'createdAt': _createdAt?.format(),
+        'updatedAt': _updatedAt?.format()
+      };
+
+  Map<String, Object?> toMap() => {
+        'id': id,
+        'username': _username,
+        'userIdentity': _userIdentity,
+        'comment': _comment,
+        'userImage': _userImage,
+        'sessionId': _sessionId,
+        'createdAt': _createdAt,
+        'updatedAt': _updatedAt
+      };
+
+  static final amplify_core.QueryModelIdentifier<CommentModelIdentifier>
+      MODEL_IDENTIFIER =
+      amplify_core.QueryModelIdentifier<CommentModelIdentifier>();
   static final ID = amplify_core.QueryField(fieldName: "id");
   static final USERNAME = amplify_core.QueryField(fieldName: "username");
-  static final USERIDENTITY = amplify_core.QueryField(fieldName: "userIdentity");
+  static final USERIDENTITY =
+      amplify_core.QueryField(fieldName: "userIdentity");
   static final COMMENT = amplify_core.QueryField(fieldName: "comment");
   static final USERIMAGE = amplify_core.QueryField(fieldName: "userImage");
   static final SESSIONID = amplify_core.QueryField(fieldName: "sessionId");
-  static var schema = amplify_core.Model.defineSchema(define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
+  static var schema = amplify_core.Model.defineSchema(
+      define: (amplify_core.ModelSchemaDefinition modelSchemaDefinition) {
     modelSchemaDefinition.name = "Comment";
     modelSchemaDefinition.pluralName = "Comments";
-    
+
     modelSchemaDefinition.authRules = [
       amplify_core.AuthRule(
-        authStrategy: amplify_core.AuthStrategy.PUBLIC,
-        operations: const [
-          amplify_core.ModelOperation.CREATE,
-          amplify_core.ModelOperation.UPDATE,
-          amplify_core.ModelOperation.DELETE,
-          amplify_core.ModelOperation.READ
-        ])
+          authStrategy: amplify_core.AuthStrategy.PUBLIC,
+          operations: const [
+            amplify_core.ModelOperation.CREATE,
+            amplify_core.ModelOperation.UPDATE,
+            amplify_core.ModelOperation.DELETE,
+            amplify_core.ModelOperation.READ
+          ])
     ];
-    
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.id());
-    
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Comment.USERNAME,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
-    ));
-    
+        key: Comment.USERNAME,
+        isRequired: true,
+        ofType: amplify_core.ModelFieldType(
+            amplify_core.ModelFieldTypeEnum.string)));
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Comment.USERIDENTITY,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
-    ));
-    
+        key: Comment.USERIDENTITY,
+        isRequired: true,
+        ofType: amplify_core.ModelFieldType(
+            amplify_core.ModelFieldTypeEnum.string)));
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Comment.COMMENT,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
-    ));
-    
+        key: Comment.COMMENT,
+        isRequired: true,
+        ofType: amplify_core.ModelFieldType(
+            amplify_core.ModelFieldTypeEnum.string)));
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Comment.USERIMAGE,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
-    ));
-    
+        key: Comment.USERIMAGE,
+        isRequired: true,
+        ofType: amplify_core.ModelFieldType(
+            amplify_core.ModelFieldTypeEnum.string)));
+
     modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.field(
-      key: Comment.SESSIONID,
-      isRequired: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.string)
-    ));
-    
-    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
-      fieldName: 'createdAt',
-      isRequired: false,
-      isReadOnly: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
-    ));
-    
-    modelSchemaDefinition.addField(amplify_core.ModelFieldDefinition.nonQueryField(
-      fieldName: 'updatedAt',
-      isRequired: false,
-      isReadOnly: true,
-      ofType: amplify_core.ModelFieldType(amplify_core.ModelFieldTypeEnum.dateTime)
-    ));
+        key: Comment.SESSIONID,
+        isRequired: true,
+        ofType: amplify_core.ModelFieldType(
+            amplify_core.ModelFieldTypeEnum.string)));
+
+    modelSchemaDefinition.addField(
+        amplify_core.ModelFieldDefinition.nonQueryField(
+            fieldName: 'createdAt',
+            isRequired: false,
+            isReadOnly: true,
+            ofType: amplify_core.ModelFieldType(
+                amplify_core.ModelFieldTypeEnum.dateTime)));
+
+    modelSchemaDefinition.addField(
+        amplify_core.ModelFieldDefinition.nonQueryField(
+            fieldName: 'updatedAt',
+            isRequired: false,
+            isReadOnly: true,
+            ofType: amplify_core.ModelFieldType(
+                amplify_core.ModelFieldTypeEnum.dateTime)));
   });
 }
 
 class _CommentModelType extends amplify_core.ModelType<Comment> {
   const _CommentModelType();
-  
+
   @override
   Comment fromJson(Map<String, dynamic> jsonData) {
     return Comment.fromJson(jsonData);
   }
-  
+
   @override
   String modelName() {
     return 'Comment';
@@ -314,37 +357,32 @@ class CommentModelIdentifier implements amplify_core.ModelIdentifier<Comment> {
   final String id;
 
   /** Create an instance of CommentModelIdentifier using [id] the primary key. */
-  const CommentModelIdentifier({
-    required this.id});
-  
+  const CommentModelIdentifier({required this.id});
+
   @override
-  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{
-    'id': id
-  });
-  
+  Map<String, dynamic> serializeAsMap() => (<String, dynamic>{'id': id});
+
   @override
   List<Map<String, dynamic>> serializeAsList() => serializeAsMap()
-    .entries
-    .map((entry) => (<String, dynamic>{ entry.key: entry.value }))
-    .toList();
-  
+      .entries
+      .map((entry) => (<String, dynamic>{entry.key: entry.value}))
+      .toList();
+
   @override
   String serializeAsString() => serializeAsMap().values.join('#');
-  
+
   @override
   String toString() => 'CommentModelIdentifier(id: $id)';
-  
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    
-    return other is CommentModelIdentifier &&
-      id == other.id;
+
+    return other is CommentModelIdentifier && id == other.id;
   }
-  
+
   @override
-  int get hashCode =>
-    id.hashCode;
+  int get hashCode => id.hashCode;
 }

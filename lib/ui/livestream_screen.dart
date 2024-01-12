@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:live_stream_app/widgets/comment_section.dart';
 import 'package:live_stream_app/widgets/videoChatScreenTestUI.dart';
@@ -6,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../backend/providers/comment_provider.dart';
-
 
 class LiveStreamScreen extends StatefulWidget {
   final String username;
@@ -44,7 +42,6 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
       sessionId = newSessionId;
     });
   }
-
 
   @override
   void initState() {
@@ -116,7 +113,12 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
           ),
           Expanded(
             flex: 1,
-            child: CommentSection(username: widget.username, isHost: widget.isHost, userIdentity: widget.userIdentity, sessionId: sessionId,),
+            child: CommentSection(
+              username: widget.username,
+              isHost: widget.isHost,
+              userIdentity: widget.userIdentity,
+              sessionId: sessionId,
+            ),
           ),
         ],
       ),

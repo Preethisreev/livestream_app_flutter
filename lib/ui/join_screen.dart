@@ -6,9 +6,7 @@ import 'package:live_stream_app/ui/home_screen.dart';
 import 'package:uuid/uuid.dart';
 import '../backend/utils/permission.dart';
 
-
 class JoinScreen extends StatefulWidget {
-
   const JoinScreen({super.key});
 
   @override
@@ -17,11 +15,13 @@ class JoinScreen extends StatefulWidget {
 
 class _JoinScreenState extends State<JoinScreen> {
   final TextEditingController _nameController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     requestPermission();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +43,8 @@ class _JoinScreenState extends State<JoinScreen> {
                         textAlign: TextAlign.justify,
                         decoration: const InputDecoration(
                           hintText: 'Your name',
-                          contentPadding: EdgeInsets.symmetric(vertical: 9.0, horizontal: 16.0),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 9.0, horizontal: 16.0),
                           isDense: true,
                           hintStyle: TextStyle(
                             color: Colors.black45,
@@ -58,14 +59,16 @@ class _JoinScreenState extends State<JoinScreen> {
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black87),
-                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.0)),
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
-                    ), Column(
+                    ),
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // watch live blue button
@@ -83,7 +86,7 @@ class _JoinScreenState extends State<JoinScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => LiveStreamScreen(
-                                  username:_nameController.text ,
+                                  username: _nameController.text,
                                   isHost: false,
                                   userIdentity: getUserIdentity(),
                                   livename: _nameController.text,
@@ -98,7 +101,8 @@ class _JoinScreenState extends State<JoinScreen> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(CupertinoIcons.paperplane_fill, color: Colors.white, size: 25),
+                                Icon(CupertinoIcons.paperplane_fill,
+                                    color: Colors.white, size: 25),
                                 SizedBox(width: 8),
                                 Text(
                                   ' Watch Live',
@@ -138,7 +142,8 @@ class _JoinScreenState extends State<JoinScreen> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(CupertinoIcons.paperplane_fill, color: Colors.black, size: 25),
+                                Icon(CupertinoIcons.paperplane_fill,
+                                    color: Colors.black, size: 25),
                                 SizedBox(width: 8),
                                 Text(
                                   ' Back',
@@ -164,6 +169,7 @@ class _JoinScreenState extends State<JoinScreen> {
       ),
     );
   }
+
   Future<String> getUserIdentity() async {
     try {
       // Generate a unique user identity using UUID
