@@ -16,21 +16,20 @@ class CommentProvider with ChangeNotifier {
   List<Comment> get comments => _comments;
 
   String? get errorMessages => _errorMessage;
-  String? _currentSessionId;
 
-  void setCurrentSessionId(String sessionId) {
-    _currentSessionId = sessionId;
-  }
+  void setCurrentSessionId(String sessionId) {}
 
   void _setIsLoading(bool value) {
     _isLoading = value;
     notifyListeners();
   }
 
+  // コメントを送信するメソッド
   Future<Either<String, Comment?>> sendComment(Comment comment) {
     return _commentRepository.sendComment(comment);
   }
 
+  // コメントを取得するメソッド
   void getComments() async {
     _setIsLoading(true);
     final commentResponse = await _commentRepository.getComments();
@@ -51,11 +50,13 @@ class CommentProvider with ChangeNotifier {
     return _commentRepository.subscribeToComments();
   }
 
+  // コメントを追加するメソッド
   void addComment(Comment comment) {
     _comments.insert(0, comment);
     notifyListeners();
   }
 
+  // コメントをクリアするメソッド
   void clearComments() {
     _comments = [];
     notifyListeners();

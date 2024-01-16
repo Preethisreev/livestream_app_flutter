@@ -172,6 +172,7 @@ class _JoinScreenState extends State<JoinScreen> {
 
   Future<String> getUserIdentity() async {
     try {
+      // UUIDを使用して一意のユーザー識別子を生成
       // Generate a unique user identity using UUID
       String userIdentity = const Uuid().v4();
       print(userIdentity);

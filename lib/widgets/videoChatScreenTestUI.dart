@@ -8,6 +8,7 @@ class VideoChatWidget extends StatelessWidget {
 
   const VideoChatWidget(
       {Key? key,
+      // ユーザーがホストであるかどうかを確認する
       this.isHost = false,
       required this.userIdentity,
       required this.livename})

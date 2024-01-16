@@ -37,6 +37,7 @@ class _CommentSectionState extends State<CommentSection> {
     super.initState();
   }
 
+  // CommentProviderを使用してコメントを取得する関数 (Function to retrieve comments using CommentProvider)
   void getComments() {
     final commentProvider = context.read<CommentProvider>();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -80,12 +81,14 @@ class _CommentSectionState extends State<CommentSection> {
               }
               if (commProvider.errorMessages != null) {
                 ScaffoldMessenger.of(context).showSnackBar(
+                  // コメントに問題がある場合はエラーメッセージを表示 (Show an error message if there are issues with comments)
                   const SnackBar(
                     content: Text("Error"),
                     duration: Duration(seconds: 2),
                   ),
                 );
               }
+              // ListView.builderを使用してコメントのリストを表示 (Display the list of live comments using a ListView.builder)
               return ListView.builder(
                 reverse: false,
                 itemCount: commProvider.comments.length,
@@ -203,6 +206,7 @@ class _CommentInputState extends State<CommentInput> {
                   ),
                 ),
               )),
+          //コメントを送るボタン　（to send comments)
           IconButton(
             icon: const Icon(Icons.send, color: buttonBlue),
             onPressed: () {
@@ -221,6 +225,7 @@ class _CommentInputState extends State<CommentInput> {
                   response.fold(
                     (error) {
                       ScaffoldMessenger.of(context).showSnackBar(
+                        // コメントの提出が失敗した場合はエラーメッセージを表示 (Show an error message if comment submission fails)
                         SnackBar(
                           content: Text("Error: $error"),
                           duration: const Duration(seconds: 2),
@@ -235,6 +240,7 @@ class _CommentInputState extends State<CommentInput> {
                   _commentController.clear();
                 });
               } else {
+                // コメントが空の場合はエラーメッセージを表示 (Show an error message if the comment is empty)
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("Error: Comment cannot be empty"),

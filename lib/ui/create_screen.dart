@@ -103,7 +103,7 @@ class _CreateScreenState extends State<CreateScreen> {
               const SizedBox(height: 35),
               Column(
                 children: [
-                  // watch live blue button
+                  // ライブを作成するボタン (Button for live streaming)
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       fixedSize: const Size(320, 50),
@@ -197,7 +197,8 @@ class _CreateScreenState extends State<CreateScreen> {
 
   Future<String> getUserIdentity() async {
     try {
-      // Generate a unique user identity using UUID
+      // UUIDを使用して一意のユーザー識別子を生成
+      // Generating a unique user identity using UUID
       String userIdentity = const Uuid().v4();
       print(userIdentity);
       return userIdentity;

@@ -31,11 +31,12 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
 
   void startNewSession() {
     final commentProvider = context.read<CommentProvider>();
-
-    // Set a new session ID (you can use a UUID or any unique identifier)
+    // 新しいセッション ID を設定します
+    // Setting a new session ID
     final newSessionId = Uuid().v4();
     commentProvider.setCurrentSessionId(newSessionId);
     print('new session id is $newSessionId');
+    // 新しいセッションの既存のコメントをクリアします
     // Clear existing comments for the new session
     commentProvider.clearComments();
     setState(() {
