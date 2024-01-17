@@ -30,6 +30,7 @@ class CommentProvider with ChangeNotifier {
   }
 
   // コメントを取得するメソッド
+  //get comments from the repository
   void getComments() async {
     _setIsLoading(true);
     final commentResponse = await _commentRepository.getComments();
