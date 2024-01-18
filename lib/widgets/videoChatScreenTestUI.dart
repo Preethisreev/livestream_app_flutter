@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:live_stream_app/constants/zego_env.dart';
+import 'package:live_stream_app/constants/zego_env.env';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
 class VideoChatWidget extends StatelessWidget {
